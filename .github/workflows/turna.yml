@@ -1,0 +1,33 @@
+name: TURNA Scanner
+
+on:
+  schedule:
+    - cron: '1,16,31,46 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run TURNA scanner
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python3 turna_bot.py
+
+      - name: Save state.json
+        run: |
+          git config user.name "turna-bot"
+          git config user.email "turna-bot@users.noreply.github.com"
+          git add state.json
+          git diff --staged --quiet || (git commit -m "Update state.json" && git push)
