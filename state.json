@@ -1,1 +1,14 @@
-{}
+{
+  "BTCUSDT": {
+    "last_processed_bar_time": 1795725900000
+  },
+  "ETHUSDT": {
+    "last_processed_bar_time": 1795725900000
+  },
+  "SOLUSDT": {
+    "last_processed_bar_time": 1795725900000
+  },
+  "SUIUSDT": {
+    "last_processed_bar_time": 1795725900000
+  }
+}
